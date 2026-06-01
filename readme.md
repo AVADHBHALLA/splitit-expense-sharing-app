@@ -33,10 +33,14 @@ Nitin Jhamnani
 4. **Technical Stack:**
 * Spring Boot (Java), Spring Data JPA, and an In-Memory H2 Database.
 
-<img width="1920" height="1080" alt="balance" src="https://github.com/user-attachments/assets/08776a1d-bb6d-4cf2-9ed4-78e145ba2695" />
-<img width="1920" height="1080" alt="expense" src="https://github.com/user-attachments/assets/c577264e-7c7f-4e62-b996-ce19ce520050" />
-<img width="1920" height="1080" alt="user" src="https://github.com/user-attachments/assets/bc93a5bf-bdc7-4d59-825c-1c8f7fbfb6cf" />
-<img width="1920" height="1080" alt="h2" src="https://github.com/user-attachments/assets/cc063578-aa50-4bfb-802c-ceeafd81487b" />
+<img width="1600" height="900" alt="h2" src="https://github.com/user-attachments/assets/78d8839c-9790-41e1-b834-be41ec6dd286" />
+<img width="1600" height="900" alt="user" src="https://github.com/user-attachments/assets/75503e9a-e268-4fb5-9c1a-aa5d7cd36c44" />
+<img width="1600" height="900" alt="expense" src="https://github.com/user-attachments/assets/0f0781d0-cfd8-44c2-9486-25ac9bdc272c" />
+<img width="1600" height="900" alt="balance" src="https://github.com/user-attachments/assets/52970046-1512-4fcb-93ff-35c8e6d20713" />
+
+
+
+
 
 
 
