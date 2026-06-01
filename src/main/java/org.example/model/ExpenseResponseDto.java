@@ -1,0 +1,17 @@
+package org.example.model;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.UUID;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class ExpenseResponseDto {
+
+    private UUID id;
+    private String description;
+    private Double amount;
+}

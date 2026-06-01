@@ -4,12 +4,14 @@ import lombok.RequiredArgsConstructor;
 import org.example.entity.User;
 import org.example.model.BalanceDto;
 import org.example.model.UserDto;
+import org.example.model.UserResponseDto;
 import org.example.service.ExpenseService;
 import org.example.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -21,13 +23,13 @@ public class UserController {
     private final ExpenseService expenseService;
 
     @PostMapping("/create")
-    public ResponseEntity<User> createuser(@RequestBody UserDto dto){
-        if(dto==null){
+    public ResponseEntity<UserResponseDto> createuser(@RequestBody UserDto dto){
+        if(Objects.isNull(dto)){
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         try {
-            User user = userService.create(dto);
-            return new ResponseEntity<>(user,HttpStatus.OK);
+            UserResponseDto response = userService.create(dto);
+            return new ResponseEntity<>(response,HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
