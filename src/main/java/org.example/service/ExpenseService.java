@@ -3,12 +3,14 @@ package org.example.service;
 import lombok.RequiredArgsConstructor;
 import org.example.entity.Expense;
 import org.example.entity.User;
+import org.example.model.BalanceDto;
 import org.example.model.ExpenseDto;
 import org.example.repository.ExpenseRepository;
 import org.example.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -27,23 +29,47 @@ public class ExpenseService {
                         )
                 );
 
-        List<User> participants =
-                userRepository.findAllById(
-                        dto.getParticipantIds());
-
+        List<User> participants = userRepository.findAllById(dto.getParticipantIds());
         Expense expense = new Expense();
-
-        expense.setDescription(
-                dto.getDescription());
-
-        expense.setTotalAmount(
-                dto.getAmount());
-
+        expense.setDescription(dto.getDescription());
+        expense.setTotalAmount(dto.getAmount());
         expense.setPayer(payer);
-
-        expense.setParticipants(
-                participants);
-
+        expense.setParticipants(participants);
         return expenseRepository.save(expense);
+    }
+
+    public BalanceDto getBalance(UUID userId){
+
+        User currentUser = userRepository
+                .findById(userId)
+                .orElseThrow(() ->
+                        new RuntimeException("User not found"));
+        double owesOthers = 0;
+        double owedByOthers = 0;
+        List<Expense> expenses = expenseRepository.findAll();
+        for(Expense expense : expenses){
+            List<User> participants = expense.getParticipants();
+            double share = expense.getTotalAmount() / participants.size();
+            User payer = expense.getPayer();
+            if(payer.getId().equals(userId)){
+                for(User participant : participants){
+                    if(!participant.getId().equals(userId)){
+                        owedByOthers += share;
+                    }
+                }
+            }
+            else{
+                for(User participant : participants){
+                    if(participant.getId().equals(userId)){
+                        owesOthers += share;
+                    }
+                }
+            }
+        }
+        return new BalanceDto(
+                currentUser.getName(),
+                owedByOthers,
+                owesOthers
+        );
     }
 }
